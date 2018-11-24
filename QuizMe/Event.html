@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bootstrap CRUD Data Table for Database with Modal Form</title>
+<title>Events</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -285,94 +285,48 @@ $(document).ready(function(){
 								<label for="selectAll"></label>
 							</span>
 						</th>
-                        <th>Name</th>
-                        <th>Email</th>
-						<th>Address</th>
-                        <th>Phone</th>
-                        <th>Actions</th>
+                        <th>Denumire</th>
+                        <th>Start</th>
+						<th>Stop</th>
+                        <th>Descriere</th>                       
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-						<td>
+                                 
+                   <script language="php">
+                    mysql_connect("localhost","root","") or die ("Nu se poate conecta la serverul MySQL");
+					mysql_select_db("quizme") or die("Nu se poate selecta baza de date"); 
+                   $query=mysql_query("Select * from Event ");
+                  $nr_rows=@mysql_num_rows($query);
+					   echo $nr_rows;
+					   if($nr_rows > 0)
+                   {
+                  $nr=0;
+                   while($row=mysql_fetch_row($query))
+                   { $nr++;
+                   echo "<tr>
+                   <td>
 							<span class="custom-checkbox">
-								<input type="checkbox" id="checkbox1" name="options[]" value="1">
+								<input type="checkbox" id="checkbox".$nr name="options[]" value="1">
 								<label for="checkbox1"></label>
 							</span>
-						</td>
-                        <td>Thomas Hardy</td>
-                        <td>thomashardy@mail.com</td>
-						<td>89 Chiaroscuro Rd, Portland, USA</td>
-                        <td>(171) 555-2222</td>
-                        <td>
-                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-						<td>
-							<span class="custom-checkbox">
-								<input type="checkbox" id="checkbox2" name="options[]" value="1">
-								<label for="checkbox2"></label>
-							</span>
-						</td>
-                        <td>Dominique Perrier</td>
-                        <td>dominiqueperrier@mail.com</td>
-						<td>Obere Str. 57, Berlin, Germany</td>
-                        <td>(313) 555-5735</td>
-                        <td>
-                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                        </td>
-                    </tr>
-					<tr>
-						<td>
-							<span class="custom-checkbox">
-								<input type="checkbox" id="checkbox3" name="options[]" value="1">
-								<label for="checkbox3"></label>
-							</span>
-						</td>
-                        <td>Maria Anders</td>
-                        <td>mariaanders@mail.com</td>
-						<td>25, rue Lauriston, Paris, France</td>
-                        <td>(503) 555-9931</td>
-                        <td>
-                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-						<td>
-							<span class="custom-checkbox">
-								<input type="checkbox" id="checkbox4" name="options[]" value="1">
-								<label for="checkbox4"></label>
-							</span>
-						</td>
-                        <td>Fran Wilson</td>
-                        <td>franwilson@mail.com</td>
-						<td>C/ Araquil, 67, Madrid, Spain</td>
-                        <td>(204) 619-5731</td>
-                        <td>
-                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                        </td>
-                    </tr>					
-					<tr>
-						<td>
-							<span class="custom-checkbox">
-								<input type="checkbox" id="checkbox5" name="options[]" value="1">
-								<label for="checkbox5"></label>
-							</span>
-						</td>
-                        <td>Martin Blank</td>
-                        <td>martinblank@mail.com</td>
-						<td>Via Monte Bianco 34, Turin, Italy</td>
-                        <td>(480) 631-2097</td>
-                        <td>
-                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                        </td>
-                    </tr> 
+						</td> ";
+                   foreach($row as $value)
+                   {
+						echo "<td>$value</td>" ;
+                   }
+                   //<td>
+                     //       <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                    //        <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                   //     </td>
+					echo "</tr>";
+                   }               
+                   }
+                   else
+                   {                   
+                    echo " <center>Nu sunt Event-uri  </center>";             
+                   }   
+               </script>                     
                 </tbody>
             </table>
 			<div class="clearfix">
@@ -393,7 +347,7 @@ $(document).ready(function(){
 	<div id="addEmployeeModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form  action="http://localhost/AddEvent.php" method="post">
+				<form  action="http://localhost/QuizMe/AddEvent.php" method="post">
 					<div class="modal-header">						
 						<h4 class="modal-title">Add Event</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -401,15 +355,15 @@ $(document).ready(function(){
 					<div class="modal-body">					
 						<div class="form-group">
 							<label>Denumire</label>
-							<input type="text" name="InputDenumire" class="form-control" required>
-						</div>
+							<input type="text" name="InputDenumire" class="form-control" required>							
+						</div>						
 						<div class="form-group">
 							<label>Start(hh:mm mm dd yyyy)</label>
-							<input type="Start" name="InputStart" class="form-control" required>
+							<input type="datetime-local" name="InputStart" class="form-control" required>
 						</div>
 						<div class="form-group">
 							<label>Stop(hh:mm mm dd yyyy)</label>
-							<input name="InputStop" type="text" class="form-control" required>
+							<input name="InputStop" type="datetime-local" class="form-control" required>
 						</div>	
 						<div class="form-group">
 							<label>Descriere</label>
@@ -434,7 +388,8 @@ $(document).ready(function(){
 						<h4 class="modal-title">Edit Employee</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
-					<div class="modal-body">					
+					<div class="modal-body">	
+								
 						<div class="form-group">
 							<label>Denumire</label>
 							<input type="text" class="form-control" required>
