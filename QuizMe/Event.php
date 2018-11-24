@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<script language="php">
+<?php 
 session_start();
-	$admin=sessionStorage.getItem("lastname");
-if (!isset($admin)){
+if (!isset($_SESSION['admin'])){
   header("Location: Login1.html");
 }
 else{
-</script>
-
+?>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -303,9 +300,9 @@ $(document).ready(function(){
                 </thead>
                 <tbody>
                                  
-                   <script language="php">
+                  <?php
 					   echo "In script";
-                    mysql_connect("localhost","root","") or die ("Nu se poate conecta la serverul MySQL");
+                    @mysql_connect("localhost","root","") or die ("Nu se poate conecta la serverul MySQL");
 					mysql_select_db("quizme") or die("Nu se poate selecta baza de date"); 
                    $query=mysql_query("Select * from Event ");
                   $nr_rows=@mysql_num_rows($query);
@@ -315,13 +312,6 @@ $(document).ready(function(){
                   $nr=0;
                    while($row=mysql_fetch_row($query))
                    { $nr++;
-                   echo "<tr>
-                   <td>
-							<span class="custom-checkbox">
-								<input type="checkbox" id="checkbox".$nr name="options[]" value="1">
-								<label for="checkbox1"></label>
-							</span>
-						</td> ";
                    foreach($row as $value)
                    {
 						echo "<td>$value</td>" ;
@@ -337,7 +327,7 @@ $(document).ready(function(){
                    {                   
                     echo " <center>Nu sunt Event-uri  </center>";             
                    }   
-               </script>                     
+              ?>                  
                 </tbody>
             </table>
 			<div class="clearfix">
@@ -449,6 +439,6 @@ $(document).ready(function(){
 	</div>
 </body>
 </html>             
-<script language="php">
+<?php
 	}
-</script>                                 		                            
+?>                  		                            

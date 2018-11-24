@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>Login</title>
-<link href="1.css" rel="stylesheet" type="text/css">
+<link href="../QuizMe/1.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -22,9 +22,9 @@
     <div class="container">
         <div class="card card-container">
             <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
-            <img id="profile-img" class="profile-img-card" src="images/user.png" />
+            <img id="profile-img" class="profile-img-card" src="../images/user.png" />
             <p id="profile-name" class="profile-name-card"></p>
-            <form class="form-signin"  method="post" action="http://localhost/LogProcess.php">
+            <form class="form-signin"  method="post" action="http://localhost/QuizMe/LogProcess.php">
                 <span id="reauth-email" class="reauth-email"></span>
                 <input type="email" name="inputEmail" class="form-control" placeholder="Email address" required autofocus>
                 <input type="password" name="inputPassword" class="form-control" placeholder="Password" required>
@@ -35,6 +35,7 @@
                 </div>
                 <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
             </form><!-- /form -->
+            <a href="http://localhost/QuizMe/Event.php">EventPHP</a>
             <a href="#" class="forgot-password">
                 Forgot the password?
             </a>

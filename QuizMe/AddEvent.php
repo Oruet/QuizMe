@@ -1,4 +1,11 @@
 <?php
+session_start();
+$admin=sessionStorage.getItem("lastname");
+if (!isset($admin)){
+  header("Location: Login1.html");
+}
+else
+{
 @mysql_connect("localhost","root","") or die ("Nu se poate conecta la serverul MySQL");
 mysql_select_db("quizme") or die("Nu se poate selecta baza de date");
 //echo $ID_Event="11";
@@ -13,7 +20,9 @@ mysql_select_db("quizme") or die("Nu se poate selecta baza de date");
 $query=@mysql_query("insert into Event  values (NULL,'$Denumire','$Start','$Stop','$Descriere')"); 
 //$query=mysql_query("insert into Event  values('$Denumire','$Start','$Stop','$Descriere')"); 
 
-echo "Eventul a fost adaugat.";
+echo "Event added.";
+}
+
 
 
 ?>

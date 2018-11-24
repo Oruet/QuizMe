@@ -9,12 +9,16 @@ mysql_select_db("quizme");
 if( mysql_num_rows($query))
 {
 	$_SESSION['admin']=$localemail;
-	
+	sessionStorage.setItem("admin", $localemail);
 	header("Location: Untitled-7.html");
 }
 else{
-	
-	header("Location: Login1.html");
+	?>
+<script language="JavaScript"> 
+	alert('Cartea  exista  si va fi stearsa!!!');  
+	</script>
+	<?php
+	header("Location: Event.html");
 }
 
 

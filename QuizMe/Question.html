@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <script language="php">
 session_start();
-	$admin=sessionStorage.getItem("lastname");
+echo	$admin=sessionStorage.getItem("lastname");
+	
 if (!isset($admin)){
   header("Location: Login1.html");
 }
@@ -13,7 +14,7 @@ else{
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Events</title>
+<title>Questions</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -277,10 +278,10 @@ $(document).ready(function(){
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-6">
-						<h2>Manage <b>Events</b></h2>
+						<h2>Manage <b>Questions</b></h2>
 					</div>
 					<div class="col-sm-6">
-						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Event</span></a>
+						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Question</span></a>
 						<a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>						
 					</div>
                 </div>
@@ -294,20 +295,19 @@ $(document).ready(function(){
 								<label for="selectAll"></label>
 							</span>
 						</th>						
-                       <th>ID_Event</th>
-                        <th>Denumire</th>
-                        <th>Start</th>
-						<th>Stop</th>
-                        <th>Descriere</th>                       
+                       <th>ID_Question</th>
+                        <th>Question</th>
+                        <th>Category </th>
+						<th>Difficulty </th>
+                        <th>Answer </th>                       
                     </tr>
                 </thead>
                 <tbody>
                                  
                    <script language="php">
-					   echo "In script";
                     mysql_connect("localhost","root","") or die ("Nu se poate conecta la serverul MySQL");
 					mysql_select_db("quizme") or die("Nu se poate selecta baza de date"); 
-                   $query=mysql_query("Select * from Event ");
+                   $query=mysql_query("Select * from Question ");
                   $nr_rows=@mysql_num_rows($query);
 					   echo $nr_rows;
 					   if($nr_rows > 0)
@@ -335,7 +335,7 @@ $(document).ready(function(){
                    }
                    else
                    {                   
-                    echo " <center>Nu sunt Event-uri  </center>";             
+                    echo " <center>No Questions  </center>"; 
                    }   
                </script>                     
                 </tbody>
@@ -358,27 +358,27 @@ $(document).ready(function(){
 	<div id="addEmployeeModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form  action="http://localhost/QuizMe/AddEvent.php" method="post">
+				<form  action="http://localhost/QuizMe/AddQuestion.php" method="post">
 					<div class="modal-header">						
-						<h4 class="modal-title">Add Event</h4>
+						<h4 class="modal-title">Add Question</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">					
 						<div class="form-group">
-							<label>Denumire</label>
-							<input type="text" name="InputDenumire" class="form-control" required>							
+							<label>Question </label>
+							<textarea name="InputQuestion" class="form-control" required></textarea>						
 						</div>						
 						<div class="form-group">
-							<label>Start(hh:mm mm dd yyyy)</label>
-							<input type="datetime-local" name="InputStart" class="form-control" required>
+							<label>Category </label>
+							<input type="text" name="InputCategory" class="form-control" required>
 						</div>
 						<div class="form-group">
-							<label>Stop(hh:mm mm dd yyyy)</label>
-							<input name="InputStop" type="datetime-local" class="form-control" required>
+							<label>Difficulty</label>
+							<input name="InputDifficulty" type="text" class="form-control" required>
 						</div>	
 						<div class="form-group">
-							<label>Descriere</label>
-							<textarea name="InputDescriere" class="form-control" required></textarea>
+							<label>Answer </label>
+							<textarea name="InputAnswer" class="form-control" required></textarea>
 						</div>
 										
 					</div>
@@ -448,7 +448,7 @@ $(document).ready(function(){
 		</div>
 	</div>
 </body>
-</html>             
+</html>         
 <script language="php">
 	}
-</script>                                 		                            
+</script>                       		                            
