@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <script language="php">
 session_start();
-echo	$admin=sessionStorage.getItem("lastname");
+
 	
-if (!isset($admin)){
+if (!isset($_SESSION['admin'])){
   header("Location: Login1.html");
 }
 else{

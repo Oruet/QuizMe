@@ -276,7 +276,8 @@ $(document).ready(function(){
                     <div class="col-sm-6">
 						<h2>Manage <b>Events</b></h2>
 					</div>
-					<div class="col-sm-6">
+					<div class="col-sm-6">					
+						<a href="#editEmployeeModal" class="btn btn-success" data-ajax="true"  data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Edit Event</span></a>
 						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Event</span></a>
 						<a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>						
 					</div>
@@ -284,13 +285,7 @@ $(document).ready(function(){
             </div>
             <table class="table table-striped table-hover">
                 <thead>
-                    <tr>
-                    <th>
-							<span class="custom-checkbox">
-								<input type="checkbox" id="selectAll">
-								<label for="selectAll"></label>
-							</span>
-						</th>						
+                    <tr>                    					
                        <th>ID_Event</th>
                         <th>Denumire</th>
                         <th>Start</th>
@@ -298,15 +293,12 @@ $(document).ready(function(){
                         <th>Descriere</th>                       
                     </tr>
                 </thead>
-                <tbody>
-                                 
-                  <?php
-					   echo "In script";
+                <tbody>                                 
+                  <?php					  
                     @mysql_connect("localhost","root","") or die ("Nu se poate conecta la serverul MySQL");
 					mysql_select_db("quizme") or die("Nu se poate selecta baza de date"); 
                    $query=mysql_query("Select * from Event ");
-                  $nr_rows=@mysql_num_rows($query);
-					   echo $nr_rows;
+                  $nr_rows=@mysql_num_rows($query);					  
 					   if($nr_rows > 0)
                    {
                   $nr=0;
@@ -314,7 +306,7 @@ $(document).ready(function(){
                    { $nr++;
                    foreach($row as $value)
                    {
-						echo "<td>$value</td>" ;
+						echo "<td >$value</td>" ;
                    }
                    //<td>
                      //       <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
@@ -330,18 +322,7 @@ $(document).ready(function(){
               ?>                  
                 </tbody>
             </table>
-			<div class="clearfix">
-                <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                <ul class="pagination">
-                    <li class="page-item disabled"><a href="#">Previous</a></li>
-                    <li class="page-item"><a href="#" class="page-link">1</a></li>
-                    <li class="page-item"><a href="#" class="page-link">2</a></li>
-                    <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                    <li class="page-item"><a href="#" class="page-link">4</a></li>
-                    <li class="page-item"><a href="#" class="page-link">5</a></li>
-                    <li class="page-item"><a href="#" class="page-link">Next</a></li>
-                </ul>
-            </div>
+			
         </div>
     </div>
 	<!-- Edit Modal HTML -->
@@ -381,32 +362,36 @@ $(document).ready(function(){
 		</div>
 	</div>
 	<!-- Edit Modal HTML -->
-	<div id="editEmployeeModal" class="modal fade">
+	<div id="editEmployeeModal" class="modal fade">		
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form>
+				<form action="http://localhost/QuizMe/EditEvent.php" method="post">
 					<div class="modal-header">						
-						<h4 class="modal-title">Edit Employee</h4>
+						<h4 class="modal-title">Edit Event</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
-					<div class="modal-body">	
-								
+					<div class="modal-body">					
+						<div class="form-group">
+							<label>ID_Event</label>
+							<input type="text" name="EID_Event"  class="form-control" required>							
+						</div>
 						<div class="form-group">
 							<label>Denumire</label>
-							<input type="text" class="form-control" required>
+							<input type="text" name="EInputDenumire"  class="form-control" required>							
+						</div>						
+						<div class="form-group">
+							<label>Start(hh:mm mm dd yyyy)</label>
+							<input type="datetime-local" name="EInputStart" class="form-control" required>
 						</div>
 						<div class="form-group">
-							<label>Email</label>
-							<input type="email" class="form-control" required>
-						</div>
+							<label>Stop(hh:mm mm dd yyyy)</label>
+							<input name="EInputStop" type="datetime-local"  class="form-control" required>
+						</div>	
 						<div class="form-group">
 							<label>Descriere</label>
-							<textarea class="form-control" required></textarea>
+							<textarea name="EInputDescriere"  class="form-control" required></textarea>
 						</div>
-						<div class="form-group">
-							<label>Stop</label>
-							<input type="text" class="form-control" required>
-						</div>					
+					
 					</div>
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
@@ -420,18 +405,22 @@ $(document).ready(function(){
 	<div id="deleteEmployeeModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form>
+				<form method="post" action="http://localhost/QuizMe/DeleteEvent.php">
 					<div class="modal-header">						
-						<h4 class="modal-title">Delete Employee</h4>
+						<h4 class="modal-title">Delete Event</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">					
 						<p>Are you sure you want to delete these Records?</p>
 						<p class="text-warning"><small>This action cannot be undone.</small></p>
+						<div class="form-group">
+							<label>ID_Event</label>
+							<input type="text" name="DID_Event"  class="form-control" required>							
+						</div>
 					</div>
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-						<input type="submit" onClick="javascript:DeleteEvent()" class="btn btn-danger" value="Delete">
+						<input type="submit"  class="btn btn-danger" value="Delete">
 					</div>
 				</form>
 			</div>
